@@ -1691,7 +1691,9 @@ function! vimwiki#base#follow_link(split, ...) abort
     if (a:split ==# 'hsplit' || a:split ==# 'vsplit') && reuse_other_split_window
       let previous_window_nr = winnr('#')
       if previous_window_nr > 0 && previous_window_nr != winnr()
+        let current_wiki_path = expand('%')
         execute previous_window_nr . 'wincmd w'
+        execute 'e ' . current_wiki_path
         let cmd = ':e'
       endif
     endif
