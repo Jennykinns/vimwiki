@@ -266,7 +266,8 @@ function! vimwiki#base#resolve_link(link_text, ...) abort
       " wiki extension - https://github.com/vimwiki/vimwiki/issues/950
       let ext = fnamemodify(link_text, ':e')
       let ext_with_dot = '.' . ext
-      if ext ==? '' || ext_with_dot !=? vimwiki#vars#get_wikilocal('ext', link_infos.index)
+      if ext ==? '' || (ext_with_dot !=? vimwiki#vars#get_wikilocal('ext', link_infos.index)
+                        \ && index(vimwiki#vars#get_wikilocal('recognized_filetypes'), ext) == -1)
         let link_infos.filename .= vimwiki#vars#get_wikilocal('ext', link_infos.index)
       endif
     endif
